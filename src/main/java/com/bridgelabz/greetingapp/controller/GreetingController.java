@@ -1,38 +1,34 @@
 package com.bridgelabz.greetingapp.controller;
 
-import java.util.concurrent.atomic.AtomicLong;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bridgelabz.greetings.model.Greeting;
+import com.example.greetingapp.service.GreetingService;
+
+/**
+ * Rest Controller Class: GreetingController.
+ */
 
 @RestController
 public class GreetingController {
-	private static final String template = "Hello, %s!";
-	private final AtomicLong counter = new AtomicLong();
 
 	/**
-	 * URL:localhost:8080/greeting
-	 * 
-	 * @return: {id =1 , content="hello world!}
-	 *          localhost:8080/greeting?name=Kishlay_Kishan
-	 * @return: { id=2, content="hello Kishlay_Kishan!
+	 * GreetingService object: greetingService.
 	 */
-	@GetMapping(value = { "/greeting", "/greeting/", "/greeting/home" })
-	public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-		return new Greeting(counter.incrementAndGet(), String.format(template, name));
-	}
+
+	@Autowired
+	GreetingService greetingService;
 
 	/**
-	 * localhost:8080/greeting/Kishlay_Kishan
-	 * 
-	 * @return: {id =1 , content="hello Kishlay_Kishan!}
+	 * Method for Get request using dependency injection: sayHello. URL: /hello
+	 *
+	 * @return - greetingService.sayHello
 	 */
-	@GetMapping("greeting/{name}")
-	public Greeting greetings(@PathVariable String name) {
-		return new Greeting(counter.incrementAndGet(), String.format(template, name));
+
+	@GetMapping("/hello")
+	public String sayHello() {
+		return greetingService.sayHello();
 	}
+
 }
