@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * SpringBootApplication class.
  */
-
 @SpringBootApplication()
 public class GreetingsApplication {
 

@@ -2,22 +2,22 @@ package com.bridgelabz.greetingapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.greetingapp.entity.User;
 import com.example.greetingapp.service.GreetingService;
 
 /**
  * Rest Controller Class: GreetingController.
  */
-
 @RestController
 public class GreetingController {
-
 	/**
 	 * GreetingService object: greetingService.
 	 */
-
 	@Autowired
 	GreetingService greetingService;
 
@@ -34,10 +34,16 @@ public class GreetingController {
 			lastName = "";
 		else if (firstName == null)
 			firstName = "";
-		else {
+		else if (firstName == null && lastName == null) {
 			firstName = "";
 			lastName = "";
 		}
 		return greetingService.sayHelloByName(firstName, lastName);
+	}
+
+	@PostMapping("/post")
+	public User sayHello(@RequestBody User user) {
+		User newuser = greetingService.sayHello(user);
+		return newuser;
 	}
 }
