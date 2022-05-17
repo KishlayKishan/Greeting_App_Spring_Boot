@@ -1,5 +1,6 @@
 package com.bridgelabz.greetingapp.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,14 +46,20 @@ public class GreetingController {
 	}
 
 	@PostMapping("/post")
-	public User sayHello1(@RequestBody User user) {
+	public User sayHello(@RequestBody User user) {
 		User newuser = greetingService.sayHello(user);
 		return newuser;
 	}
 
-	@GetMapping("/get/{id}")
+	@GetMapping("/user/{id}")
 	public Optional<User> sayHelloById(@PathVariable int id) {
 		Optional<User> response = greetingService.sayHelloById(id);
+		return response;
+	}
+
+	@GetMapping("/users")
+	public List<User> sayHelloToAll() {
+		List<User> response = greetingService.sayHelloAll();
 		return response;
 	}
 }

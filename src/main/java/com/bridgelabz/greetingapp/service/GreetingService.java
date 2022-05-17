@@ -1,5 +1,6 @@
 package com.bridgelabz.greetingapp.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,11 @@ public class GreetingService {
 
 	public Optional<User> sayHelloById(int id) {
 		return greetingRepository.findById(id);
+
+	}
+
+	public List<User> sayHelloAll() {
+		return greetingRepository.findAll();
 
 	}
 }
