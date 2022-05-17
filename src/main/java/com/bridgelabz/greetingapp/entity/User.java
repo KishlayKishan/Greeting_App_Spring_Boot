@@ -1,9 +1,8 @@
-package com.example.greetingapp.entity;
+package com.bridgelabz.greetingapp.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 @Entity
 public class User {

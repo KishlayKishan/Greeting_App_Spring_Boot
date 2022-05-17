@@ -1,16 +1,21 @@
-package com.example.greetingapp.service;
+package com.bridgelabz.greetingapp.service;
+
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.greetingapp.entity.User;
-import com.example.greetingapp.repository.GreetingRepository;
+import com.bridgelabz.greetingapp.entity.User;
+import com.bridgelabz.greetingapp.repository.GreetingRepository;
 
 /**
  * Service Class: GreetingService.
  */
 @Service
 public class GreetingService {
+	@Autowired
+	GreetingRepository greetingRepository;
+
 	/**
 	 * Method for printing String.
 	 *
@@ -21,9 +26,6 @@ public class GreetingService {
 		return "Hello " + firstName + " " + lastName + "!!!";
 	}
 
-	@Autowired
-	GreetingRepository greetingRepository;
-
 	public User sayHello(User user) {
 		User newuser = new User(user);
 		greetingRepository.save(user);
@@ -33,5 +35,10 @@ public class GreetingService {
 	public String sayPostHello(User user) {
 		User newUser = new User(user);
 		return "Hello " + newUser;
+	}
+
+	public Optional<User> sayHelloById(int id) {
+		return greetingRepository.findById(id);
+
 	}
 }

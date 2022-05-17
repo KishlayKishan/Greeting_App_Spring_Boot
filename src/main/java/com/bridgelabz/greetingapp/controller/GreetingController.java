@@ -1,14 +1,17 @@
 package com.bridgelabz.greetingapp.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.greetingapp.entity.User;
-import com.example.greetingapp.service.GreetingService;
+import com.bridgelabz.greetingapp.entity.User;
+import com.bridgelabz.greetingapp.service.GreetingService;
 
 /**
  * Rest Controller Class: GreetingController.
@@ -34,7 +37,7 @@ public class GreetingController {
 			lastName = "";
 		else if (firstName == null)
 			firstName = "";
-		else if (firstName == null && lastName == null) {
+		else {
 			firstName = "";
 			lastName = "";
 		}
@@ -42,8 +45,14 @@ public class GreetingController {
 	}
 
 	@PostMapping("/post")
-	public User sayHello(@RequestBody User user) {
+	public User sayHello1(@RequestBody User user) {
 		User newuser = greetingService.sayHello(user);
 		return newuser;
+	}
+
+	@GetMapping("/get/{id}")
+	public Optional<User> sayHelloById(@PathVariable int id) {
+		Optional<User> response = greetingService.sayHelloById(id);
+		return response;
 	}
 }
